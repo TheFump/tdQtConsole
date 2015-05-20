@@ -10,6 +10,7 @@
 
 #include "calendarexception.h"
 #include "duree.h"
+#include "mainwindow.h"
 
 class Tache {
     /*! \class Duree
@@ -28,10 +29,12 @@ public:
     //! Constructeur
     Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false):preemptive(preempt)
     {
+
         setId(id);
         setTitre(t);
         setDuree(dur);
         setDatesDisponibiliteEcheance(dispo, deadline);
+
     }
     QString getId() const { return identificateur; }//<!Retourne l'identificateur
     void setId(const QString& str){
@@ -52,8 +55,11 @@ public:
     void setPreemptive() { preemptive=true; }//<!Défini la préemptivité
     void setNonPreemptive() { preemptive=false; }//<!Défini la préemptivité
     QString afficherTache();
-};
 
+};
+/** \class TacheManager
+ * @brief The TacheManager class : gestion des classes
+ */
 class TacheManager {
 private :
     Tache** taches;
@@ -68,13 +74,14 @@ private :
     TacheManager& operator= (TacheManager& t);
     TacheManager();
 public :
-    static TacheManager& getInstance();
-    Tache& ajouterTache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false);
-    Tache& getTache(const QString& id);
-    bool isTacheExistante(const QString& id) const { return trouverTache(id)!=0; }
-    const Tache& getTache(const QString& code) const;
-    void load(const QString& f);
-    void save(const QString& f);
+    static TacheManager& getInstance();//<! Retourne instance tachemanager
+    Tache& ajouterTache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false);//<! ajoute une tahce à l'appli
+    Tache& getTache(const QString& id);//<! retourne une tache via son id
+    bool isTacheExistante(const QString& id) const { return trouverTache(id)!=0; }//retourne l'existance d'une tahce
+    const Tache& getTache(const QString& code) const;//<! récupère une tahce via code
+    void load(const QString& f); //<! enregistre l'état des taches
+    void save(const QString& f); //charge les taches
+    void viderTaches();//<! vide les taches
 
 
 };

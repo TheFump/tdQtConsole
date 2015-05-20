@@ -18,9 +18,13 @@ QString Tache::afficherTache()
     text.append("Description de la tache : \n");
     text.append("Identificateur : " + this->getId() + "\n");
     text.append("Titre : " + this->getTitre() + "\n");
-    QTextStream s;
-    s << this->getDuree();
-    text.append("Duree : " + s.readAll() + "\n");
+    Duree d = this->getDuree();
+    int x = d.getDureeEnMinutes();
+    QString z;
+    z.setNum(x);
+    text.append("Duree : ");
+    text.append(z);
+    text.append("\n");
     text.append("Départ : " + this->getDateDisponibilite().toString("dd.MM.yyyy")+ "\n");
     text.append("Echeance : " + this->getDateEcheance().toString("dd.MM.yyyy")+ "\n");
     if(this->isPreemptive())
@@ -60,7 +64,7 @@ Tache* TacheManager::trouverTache(const QString& id)const{
 }
 
 Tache& TacheManager::ajouterTache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt){
-    if (trouverTache(id)) throw CalendarException("erreur, TacheManager, tache deja existante");
+    //if (trouverTache(id)) throw CalendarException("erreur, TacheManager, tache deja existante");
     Tache* newt=new Tache(id,t,dur,dispo,deadline,preempt);
     addItem(newt);
     return *newt;
@@ -107,6 +111,12 @@ void  TacheManager::save(const QString& f){
     stream.writeEndElement();
     stream.writeEndDocument();
     newfile.close();
+}
+
+void TacheManager::viderTaches()
+{
+    for(unsigned int i=0; i<nb; i++) delete taches[i];
+    delete[] taches;
 }
 
 void TacheManager::load(const QString& f){

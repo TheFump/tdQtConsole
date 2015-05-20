@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     //TacheManager &m = TacheManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
     m.ajouterTache("id", "titre", 600, d, du, false);
+    m.ajouterTache("id2", "titre2", 600, d, du, true);
     //w.MainWindow::afficher(t);
     w.show();
 
