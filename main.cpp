@@ -10,11 +10,15 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     MainWindow w;
     QDate d (2015,7,2); QDate du (2016, 7, 1);
-    Tache t("id", "titre", 600, d, du, false);
+    QTime t (2, 0); QTime t2(4, 0);
+    //Tache t("id", "titre", 600, d, du, false);
     //TacheManager &m = TacheManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
     m.ajouterTache("id", "titre", 600, d, du, false);
     m.ajouterTache("id2", "titre2", 600, d, du, true);
+    ProgrammationManager &p = ProgrammationManager::getInstance();
+    p.ajouterProgrammation(m.getTache("id"), d, t, t2);
+    w.update();
     //w.MainWindow::afficher(t);
     w.show();
 

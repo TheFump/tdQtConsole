@@ -23,6 +23,7 @@
 #include <QGraphicsEllipseItem>
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
+#include <QTableWidgetItem>
 #include "taches.h"
 
 
@@ -37,18 +38,22 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void update();
+    void afficherCalendar();
 
 
 
 private:
     Ui::MainWindow *ui;
-    void update();
+    void displayProgrammation(const Programmation& p);
 
 
 public slots:
     void on_printTache_clicked();
     void on_ajouterTache_pressed();
     void on_MainWindow_quit();
+    void on_addProg_clicked();
+
 };
 
 

@@ -11,15 +11,21 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(afficherT(Tache& t)));
     QMetaObject::connectSlotsByName(this);
 
-    ui->Calendar->setRowCount(12);
+    ui->Calendar->setRowCount(24);
     ui->Calendar->setColumnCount(7);
 
     QStringList days;
     days << "Monday" << "Tuesday" << "Wednesday" << "Thursday" << "Friday" << "Saturday" << "Sunday";
     ui->Calendar->setHorizontalHeaderLabels(days);
     QStringList hours;
-    hours << "00h00" << "02h00" << "04h00" << "06h00" << "08h00" << "10h00" << "12h00" << "14h00" << "16h00"<< "18h00" << "20h00" << "22h00" << "24h00";
+    hours << "00h00" << "01h00" << "02h00" << "03h00" <<  "04h00" << "05h00" << "06h00" << "07h00" << "08h00" << "09h00" << "10h00" << "11h00" << "12h00" << "13h00" << "14h00" << "15h00" << "16h00" << "17h00" << "18h00" << "19h00" << "20h00" << "21h00" << "22h00" << "23h00" << "24h00";
     ui->Calendar->setVerticalHeaderLabels(hours);
+    for(int i =0; i < 24; i++){
+        for(int j =0; j < 7; j++){
+            ui->Calendar->setItem(i, j, new QTableWidgetItem);
+
+        }
+    }
 
 
 
@@ -35,7 +41,31 @@ MainWindow::~MainWindow()
 void MainWindow::update()
 {
 
+  MainWindow::afficherCalendar();
 }
+
+void MainWindow::afficherCalendar()
+{
+    ProgrammationManager &p = ProgrammationManager::getInstance();
+    ProgrammationManager::Iterator i = p.getIterator();
+    while(!i.isDone()){
+        MainWindow::displayProgrammation(i.current());
+        i.next();
+    }
+}
+
+void MainWindow::displayProgrammation(const Programmation &p)
+{
+    int date = p.getDate().dayOfWeek();
+    int i=0;
+    for( i = p.getHoraire().toString("h").toInt(); i <p.getfin().toString("h").toInt(); i++)
+    {
+        ui->Calendar->item(i, date)->setBackgroundColor(Qt::gray);
+    }
+}
+
+
+
 
 void MainWindow::on_printTache_clicked()
 {
@@ -78,6 +108,14 @@ void MainWindow::on_MainWindow_quit()
 {
     TacheManager &m = TacheManager::getInstance();
     m.viderTaches();
+}
+
+void MainWindow::on_addProg_clicked()
+{
+    ProgrammationManager &p = ProgrammationManager::getInstance();
+    TacheManager &m = TacheManager::getInstance();
+    p.ajouterProgrammation(m.getTache(ui->progId->text()), ui->progDate->date(), ui->progHoraire->time(), ui->Progfin->time());
+   // m.getTache;
 }
 
 //*********************************************************************CalendarWidgget***********************************************************************************

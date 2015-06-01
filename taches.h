@@ -23,10 +23,6 @@ protected:
     QDate disponibilite;
     QDate echeance;
     bool preemptive;
-
-    //friend class TacheManager;
-public:
-    //! Constructeur
     Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false):preemptive(preempt)
     {
 
@@ -36,6 +32,10 @@ public:
         setDatesDisponibiliteEcheance(dispo, deadline);
 
     }
+    friend class TacheManager;
+public:
+    //! Constructeur
+
     QString getId() const { return identificateur; }//<!Retourne l'identificateur
     void setId(const QString& str){
         //if (TacheManager::getInstance().isTacheExistante((str))) throw CalendarException("erreur TacheManager : tache id déjà existante");
@@ -61,6 +61,7 @@ public:
  * @brief The TacheManager class : gestion des classes
  */
 class TacheManager {
+    friend class Tache;
 private :
     Tache** taches;
     unsigned int nb;
@@ -83,8 +84,99 @@ public :
     void save(const QString& f); //charge les taches
     void viderTaches();//<! vide les taches
 
+    class Iterator {
+        friend class TacheManager;
+        Tache** currentTache;
+        unsigned int nbRemain;
+        Iterator(Tache** u, unsigned nb):currentTache(u),nbRemain(nb){}
+    public:
+        Iterator():nbRemain(0),currentTache(0){}
+        bool isDone() const { return nbRemain==0; }
+        void next() {
+            if (isDone())
+                throw CalendarException("error, next on an iterator which is done");
+            nbRemain--;
+            currentTache++;
+        }
+        Tache& current() const {
+            if (isDone())
+                throw CalendarException("error, indirection on an iterator which is done");
+            return **currentTache;
+        }
+    };
+
+    Iterator getIterator() {
+        return Iterator(taches,nb);
+    }
 
 };
+
+////////////////////////////////////////////////Programmation des taches
+
+class Programmation {
+    friend class ProgrammationManager;
+protected:
+
+    const Tache* tache;
+    QDate date;
+    QTime horaire;
+    QTime fin;
+public:
+    Programmation(const Tache& t, const QDate& d, const QTime& h, const QTime& f):tache(&t), date(d), horaire(h), fin(f){}
+    const Tache& getTache() const { return *tache; }
+    QDate getDate() const { return date; }
+    QTime getHoraire() const { return horaire; }
+    QTime getfin() const {return fin;}
+
+};
+
+class ProgrammationManager {
+    friend class Programmation;
+private:
+    Programmation** programmations;
+    unsigned int nb;
+    unsigned int nbMax;
+    static ProgrammationManager m_instance;
+
+    void addItem(Programmation* t);
+    Programmation* trouverProgrammation(const Tache& t) const;
+
+    ProgrammationManager();
+    ~ProgrammationManager();
+    ProgrammationManager(const ProgrammationManager& um);
+    ProgrammationManager& operator=(const ProgrammationManager& um);
+public:
+
+    void ajouterProgrammation(const Tache& t, const QDate& d, const QTime& h, const QTime& f);
+    static ProgrammationManager& getInstance();
+
+    class Iterator {
+        friend class ProgrammationManager;
+        Programmation** currentProg;
+        unsigned int nbRemain;
+        Iterator(Programmation** u, unsigned nb):currentProg(u),nbRemain(nb){}
+    public:
+        Iterator():nbRemain(0),currentProg(0){}
+        bool isDone() const { return nbRemain==0; }
+        void next() {
+            if (isDone())
+                throw CalendarException("error, next on an iterator which is done");
+            nbRemain--;
+            currentProg++;
+        }
+        Programmation& current() const {
+            if (isDone())
+                throw CalendarException("error, indirection on an iterator which is done");
+            return **currentProg;
+        }
+    };
+
+    Iterator getIterator() {
+        return Iterator(programmations,nb);
+    }
+};
+
+
 
 
 
