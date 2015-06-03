@@ -16,8 +16,9 @@ int main(int argc, char *argv[])
     TacheManager &m = TacheManager::getInstance();
     m.ajouterTache("id", "titre", 600, d, du, false);
     m.ajouterTache("id2", "titre2", 600, d, du, true);
-    ProgrammationManager &p = ProgrammationManager::getInstance();
-    p.ajouterProgrammation(m.getTache("id"), d, t, t2);
+    Event e("id", "titre", 600);
+   // ProgrammationManager &p = ProgrammationManager::getInstance();
+    //p.ajouterProgrammation(m.getTache("id"), d, t, t2);
     w.update();
     //w.MainWindow::afficher(t);
     w.show();

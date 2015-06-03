@@ -39,9 +39,9 @@ protected:
     QDate disponibilite;
     QDate echeance;
     bool preemptive;
-    Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false):preemptive(preempt)
+    Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false): Event(id, t, dur),preemptive(preempt)
     {
-        Event(id, t, dur);
+
         setDatesDisponibiliteEcheance(dispo, deadline);
 
     }
@@ -49,7 +49,7 @@ protected:
 public:
     //! Constructeur
 
-    QString getId() const { return identificateur; }//<!Retourne l'identificateur
+    QString getId() const { return Event::getId(); }//<!Retourne l'identificateur
     void setId(const QString& str){
         //if (TacheManager::getInstance().isTacheExistante((str))) throw CalendarException("erreur TacheManager : tache id déjà existante");
         Event::setId(str);

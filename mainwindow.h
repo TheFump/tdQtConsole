@@ -53,6 +53,8 @@ public slots:
     void on_ajouterTache_pressed();
     void on_MainWindow_quit();
     void on_addProg_clicked();
+    void on_CalendarNext_clicked();
+    void on_CalendarPrevious_clicked();
 
 };
 

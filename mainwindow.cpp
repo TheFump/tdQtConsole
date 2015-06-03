@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     //connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(afficherT(Tache& t)));
-    QMetaObject::connectSlotsByName(this);
+    //QMetaObject::connectSlotsByName(this);
 
     ui->Calendar->setRowCount(24);
     ui->Calendar->setColumnCount(7);
@@ -26,8 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
         }
     }
-
-
+    ui->CalendarDate->setDate(QDate::currentDate());
 
 }
 
@@ -40,7 +39,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::update()
 {
-
   MainWindow::afficherCalendar();
 }
 
@@ -48,10 +46,15 @@ void MainWindow::afficherCalendar()
 {
     ProgrammationManager &p = ProgrammationManager::getInstance();
     ProgrammationManager::Iterator i = p.getIterator();
+    QDate comp = ui->CalendarDate->date();
     while(!i.isDone()){
+        if(i.current().getDate().weekNumber() == comp.weekNumber() ){
+            if(i.current().getDate().year() == comp. year()){
         MainWindow::displayProgrammation(i.current());
-        i.next();
+
+            }
     }
+    i.next();}
 }
 
 void MainWindow::displayProgrammation(const Programmation &p)
@@ -115,7 +118,20 @@ void MainWindow::on_addProg_clicked()
     ProgrammationManager &p = ProgrammationManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
     p.ajouterProgrammation(m.getTache(ui->progId->text()), ui->progDate->date(), ui->progHoraire->time(), ui->Progfin->time());
-   // m.getTache;
+    this->update();
+}
+
+void MainWindow::on_CalendarNext_clicked()
+{
+    ui->CalendarDate->setDate(ui->CalendarDate->date().addDays(7));
+    this->update();
+}
+
+void MainWindow::on_CalendarPrevious_clicked()
+{
+    ui->CalendarDate->setDate(ui->CalendarDate->date().addDays(-7));
+    this->update();
+
 }
 
 //*********************************************************************CalendarWidgget***********************************************************************************

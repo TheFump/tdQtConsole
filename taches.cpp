@@ -64,7 +64,7 @@ Tache* TacheManager::trouverTache(const QString& id)const{
 }
 
 Tache& TacheManager::ajouterTache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt){
-    //if (trouverTache(id)) throw CalendarException("erreur, TacheManager, tache deja existante");
+    if (trouverTache(id)) throw CalendarException("erreur, TacheManager, tache deja existante");
     Tache* newt=new Tache(id,t,dur,dispo,deadline,preempt);
     addItem(newt);
     return *newt;
