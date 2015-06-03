@@ -111,7 +111,7 @@ void MainWindow::on_MainWindow_quit()
 }
 
 void MainWindow::on_addProg_clicked()
-{
+{//bug chelou a corriger
     ProgrammationManager &p = ProgrammationManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
     p.ajouterProgrammation(m.getTache(ui->progId->text()), ui->progDate->date(), ui->progHoraire->time(), ui->Progfin->time());

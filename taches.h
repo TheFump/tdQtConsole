@@ -12,23 +12,36 @@
 #include "duree.h"
 #include "mainwindow.h"
 
-class Tache {
-    /*! \class Duree
-            \brief Classe permettant de définir des taches
-    */
+class Event {
 protected:
     QString identificateur;
     QString titre;
     Duree duree;
+public :
+    Event(){}
+    Event(const QString& id, const QString& t, const Duree& dur):identificateur(id), titre(t), duree(dur){}
+    QString getId() const { return identificateur; }//<!Retourne l'identificateur
+    void setId(const QString& str){
+        //if (TacheManager::getInstance().isTacheExistante((str))) throw CalendarException("erreur TacheManager : tache id déjà existante");
+        identificateur=str;
+    }
+    QString getTitre() const { return titre; }//<!Retourne le titre
+    void setTitre(const QString& str) { titre=str; }//<!Définir le titre
+    Duree getDuree() const { return duree; }//<!Retourne la durée
+    void setDuree(const Duree& d) { duree=d; }//<!Défini la durée
+};
+
+class Tache : public Event {
+    /*! \class Tache
+            \brief Classe permettant de définir des taches
+    */
+protected:
     QDate disponibilite;
     QDate echeance;
     bool preemptive;
     Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false):preemptive(preempt)
     {
-
-        setId(id);
-        setTitre(t);
-        setDuree(dur);
+        Event(id, t, dur);
         setDatesDisponibiliteEcheance(dispo, deadline);
 
     }
@@ -39,12 +52,9 @@ public:
     QString getId() const { return identificateur; }//<!Retourne l'identificateur
     void setId(const QString& str){
         //if (TacheManager::getInstance().isTacheExistante((str))) throw CalendarException("erreur TacheManager : tache id déjà existante");
-        identificateur=str;
+        Event::setId(str);
     }
-    QString getTitre() const { return titre; }//<!Retourne le titre
-    void setTitre(const QString& str) { titre=str; }//<!Définir le titre
-    Duree getDuree() const { return duree; }//<!Retourne la durée
-    void setDuree(const Duree& d) { duree=d; }//<!Défini la durée
+
     QDate getDateDisponibilite() const {  return disponibilite; }//<!Retourne la disponibilité
     QDate getDateEcheance() const {  return echeance; }//<!Retourne l'echeance
     void setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e) {//<!Définit la disponibilité et l'echeance en vérifiant que la première est bien inféreur a la seconde

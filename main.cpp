@@ -23,4 +23,5 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
+    //todo corriger bug bouton programmationc
 }
