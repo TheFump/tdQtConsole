@@ -13,21 +13,19 @@
 #include "event.h"
 #include "tachemanager.h"
 
+/*! \class Tache
+        \brief Classe permettant de définir des taches
+*/
 class Tache : public Event {
-    /*! \class Tache
-            \brief Classe permettant de définir des taches
-    */
+
+    friend class TacheManager;
+
 protected:
     QDate disponibilite;
     QDate echeance;
     bool preemptive;
-    Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false): Event(id, t, dur),preemptive(preempt)
-    {
+    Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt=false);
 
-        setDatesDisponibiliteEcheance(dispo, deadline);
-
-    }
-    friend class TacheManager;
 public:
     //! Constructeur
 
@@ -39,10 +37,7 @@ public:
 
     QDate getDateDisponibilite() const {  return disponibilite; }//<!Retourne la disponibilité
     QDate getDateEcheance() const {  return echeance; }//<!Retourne l'echeance
-    void setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e) {//<!Définit la disponibilité et l'echeance en vérifiant que la première est bien inféreur a la seconde
-        if (e<disp) throw CalendarException("erreur Tâche : date echéance < date disponibilité");
-        disponibilite=disp; echeance=e;
-    }
+    void setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e);
     bool isPreemptive() const { return preemptive; }//<!Retourne la préemptivité
     void setPreemptive() { preemptive=true; }//<!Défini la préemptivité
     void setNonPreemptive() { preemptive=false; }//<!Défini la préemptivité

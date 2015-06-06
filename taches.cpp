@@ -1,5 +1,16 @@
 #include "taches.h"
 
+Tache::Tache(const QString& id, const QString& t, const Duree& dur, const QDate& dispo, const QDate& deadline, bool preempt)
+    : Event(id, t, dur),preemptive(preempt)
+{
+    setDatesDisponibiliteEcheance(dispo, deadline);
+}
+
+void Tache::setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e)
+{//<!Définit la disponibilité et l'echeance en vérifiant que la première est bien inféreur a la seconde
+    if (e<disp) throw CalendarException("erreur Tâche : date echéance < date disponibilité");
+    disponibilite=disp; echeance=e;
+}
 
 QTextStream &operator<<(QTextStream &f, const Tache &t)
 {

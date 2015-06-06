@@ -1,9 +1,9 @@
-//#include "duree.h"
 #include "mainwindow.h"
-//#include "taches.h"
 #include"tachemanager.h"
+#include "projet.h"
+#include "projetmanager.h"
 
-
+#include <iostream>
 #include <QApplication>
 #include <QFileDialog>
 #include <QDate>
@@ -11,6 +11,7 @@
 
 int main(int argc, char *argv[])
 {
+
     QApplication a(argc, argv);
     MainWindow w;
     QDate d (2015,7,2); QDate du (2016, 7, 1);
@@ -29,4 +30,5 @@ int main(int argc, char *argv[])
 
     return a.exec();
     //todo corriger bug bouton programmationc
+
 }
