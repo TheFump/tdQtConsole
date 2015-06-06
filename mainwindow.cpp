@@ -1,5 +1,10 @@
 #include "mainwindow.h"
+#include "tachemanager.h"
+#include "programmation.h"
+#include "programmationmanager.h"
 #include "ui_mainwindow.h"
+
+
 
 
 

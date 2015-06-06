@@ -1,6 +1,8 @@
 #ifndef CALENDAREXCEPTION
 #define CALENDAREXCEPTION
 
+#include <QString>
+
 class CalendarException{
 public:
     CalendarException(const QString& message):info(message){}

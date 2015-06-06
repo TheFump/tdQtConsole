@@ -7,7 +7,7 @@
 #include <QStyledItemDelegate>
 #include <QTextDocument>
 #include <QPainter>
-#include<QTableWidget>
+#include <QTableWidget>
 #include <QStyleOptionViewItem>
 #include <QModelIndex>
 #include <QItemDelegate>
@@ -24,8 +24,8 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
 #include <QTableWidgetItem>
-#include "taches.h"
 
+class Programmation;
 
 namespace Ui {
 class MainWindow;

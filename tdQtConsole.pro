@@ -10,13 +10,21 @@ QT += xml
 SOURCES += main.cpp \
     mainwindow.cpp \
     taches.cpp \
-    duree.cpp
+    duree.cpp \
+    event.cpp \
+    tachemanager.cpp \
+    programmation.cpp \
+    programmationmanager.cpp
 
 HEADERS += \
     mainwindow.h \
     taches.h \
     duree.h \
-    calendarexception.h
+    calendarexception.h \
+    event.h \
+    tachemanager.h \
+    programmation.h \
+    programmationmanager.h
 
 FORMS += \
     mainwindow.ui
