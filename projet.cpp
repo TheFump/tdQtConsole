@@ -1,25 +1,18 @@
 #include "projet.h"
 
 
- void Projet::setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e)
-{//<!Définit la disponibilité et l'echeance en vérifiant que la première est bien inféreur a la seconde
-    if (e<disp) throw CalendarException("erreur Tâche : date echéance < date disponibilité");
-    disponibilite=disp; echeance=e;
-}
-
- QString Projet::afficherProjet()
- {
-     QString text;
-     text.append("Description du porjet : \n");
-     text.append("nom : " + getNom() + "\n");
-     text.append("disponibilite : " + getDisponibilite().toString() + "\n");
-     text.append("echeance : " + getEcheance().toString() + "\n");
-     return text;
- }
-
-/*Projet::~Projet()
+void Projet::addTache(Tache *t)
 {
-    for(unsigned int i=0; i<nb; i++)
-        delete tab[i];
-    delete[] tab;
-}*/
+    if (nb==nbMax){
+        //BUG IS HERE
+        Tache** newtab=new Tache*[nbMax+10];
+        for(unsigned int i=0; i<nb; i++) newtab[i]=taches[i];
+        // ou memcpy(newtab,taches,nb*sizeof(Tache*));
+        nbMax+=10;
+        Tache** old=taches;
+        taches=newtab;
+        delete[] old;
+    }
+    taches[nb]=t;
+    nb++;
+}

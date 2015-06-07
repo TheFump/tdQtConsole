@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+
 #include <QMainWindow>
 #include <QTextStream>
 #include <QPlainTextEdit>
@@ -55,6 +56,8 @@ public slots:
     void on_addProg_clicked();
     void on_CalendarNext_clicked();
     void on_CalendarPrevious_clicked();
+    void on_ajouterProjet_pressed();
+    void on_addtachetoproject_clicked();
 
 };
 

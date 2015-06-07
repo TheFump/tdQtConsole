@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1212</width>
-    <height>710</height>
+    <width>1224</width>
+    <height>780</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,7 +52,7 @@
       <x>0</x>
       <y>20</y>
       <width>211</width>
-      <height>51</height>
+      <height>106</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -64,9 +64,23 @@
       </widget>
      </item>
      <item>
+      <widget class="QPushButton" name="addtachetoproject">
+       <property name="text">
+        <string>Ajouter Tache à Projet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLineEdit" name="tacheId">
        <property name="text">
         <string>Donnez id de la tache ici</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="projetId">
+       <property name="text">
+        <string>Donner id du projet</string>
        </property>
       </widget>
      </item>
@@ -76,9 +90,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>90</y>
+      <y>170</y>
       <width>211</width>
-      <height>258</height>
+      <height>335</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -86,6 +100,13 @@
       <widget class="QPushButton" name="ajouterTache">
        <property name="text">
         <string>Ajouter Tache</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ajouterProjet">
+       <property name="text">
+        <string>Ajouter Projet (Id et Titre Uniquement)</string>
        </property>
       </widget>
      </item>
@@ -150,16 +171,16 @@
       <widget class="QDateEdit" name="fin"/>
      </item>
      <item>
-      <widget class="QRadioButton" name="preempt">
+      <widget class="QRadioButton" name="composite">
        <property name="text">
-        <string>Préemptive</string>
+        <string>Composite</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="composite">
+      <widget class="QRadioButton" name="preempt">
        <property name="text">
-        <string>Composite</string>
+        <string>Préemptive</string>
        </property>
       </widget>
      </item>
@@ -189,7 +210,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>350</y>
+      <y>510</y>
       <width>221</width>
       <height>224</height>
      </rect>
@@ -290,7 +311,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1212</width>
+     <width>1224</width>
      <height>21</height>
     </rect>
    </property>

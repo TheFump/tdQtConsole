@@ -3,6 +3,7 @@
 #include "programmation.h"
 #include "programmationmanager.h"
 #include "ui_mainwindow.h"
+#include "projetmanager.h"
 
 
 
@@ -112,6 +113,20 @@ void MainWindow::on_ajouterTache_pressed()
     }
 }
 
+void MainWindow::on_ajouterProjet_pressed()
+{
+    ProjetManager &p = ProjetManager::getInstance();
+    p.ajouterProjet(ui->id->text(), ui->titre->text());
+}
+
+void MainWindow::on_addtachetoproject_clicked()
+{
+    ProjetManager &p = ProjetManager::getInstance();
+
+    p.ajouterTache(ui->tacheId->text(), ui->projetId->text());
+}
+
+
 void MainWindow::on_MainWindow_quit()
 {
     TacheManager &m = TacheManager::getInstance();
@@ -119,7 +134,7 @@ void MainWindow::on_MainWindow_quit()
 }
 
 void MainWindow::on_addProg_clicked()
-{//bug chelou a corriger
+{
     ProgrammationManager &p = ProgrammationManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
     p.ajouterProgrammation(m.getTache(ui->progId->text()), ui->progDate->date(), ui->progHoraire->time(), ui->Progfin->time());
@@ -138,6 +153,7 @@ void MainWindow::on_CalendarPrevious_clicked()
     this->update();
 
 }
+
 
 //*********************************************************************CalendarWidgget***********************************************************************************
 

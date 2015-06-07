@@ -15,8 +15,8 @@ SOURCES += main.cpp \
     tachemanager.cpp \
     programmation.cpp \
     programmationmanager.cpp \
-    projet.cpp \
-    projetmanager.cpp
+    projetmanager.cpp \
+    projet.cpp
 
 HEADERS += \
     mainwindow.h \

@@ -1,32 +1,34 @@
 #ifndef PROJET_H
 #define PROJET_H
+#include "taches.h"
+#include "projetmanager.h"
 
-#include <QString>
-#include <QDate>
+class Projet {
+protected:
+    QString identificateur;
+    QString titre;
 
-#include "calendarexception.h"
+    Tache** taches;
+    unsigned int nb;
+    unsigned int nbMax;
 
-class Tache;
+public :
+    Projet(){}
+    Projet(const QString& id, const QString& t):identificateur(id), titre(t), nb(0), nbMax(0), taches(0){}
+    QString getId() const { return identificateur; }//<!Retourne l'identificateur
+    void setId(const QString& str){
+        //if (TacheManager::getInstance().isTacheExistante((str))) throw CalendarException("erreur TacheManager : tache id déj�  existante");
+        identificateur=str;
+    }
+    QString getTitre() const { return titre; }//<!Retourne le titre
+    void setTitre(const QString& str) { titre=str; }//<!Définir le titre
 
-class Projet
-{
-public:
+    void addTache(Tache* t);
 
-    QString afficherProjet();
 
-    QString& getNom() { return nom; }
-    QDate getDisponibilite() const { return disponibilite; }
-    QDate getEcheance() const { return echeance; }
-    void setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e);
-private:
-    QString nom;
-    QDate disponibilite;
-    QDate echeance;
-    //Il faut une table de projet qui sera maintenu a jour
-    //Tache** tab;
 
-    Projet(const QString& n):nom(n),disponibilite(QDate::currentDate()),echeance(QDate::currentDate()) {}
-    ~Projet();
 };
 
+
 #endif // PROJET_H
+
