@@ -64,23 +64,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="addtachetoproject">
-       <property name="text">
-        <string>Ajouter Tache à Projet</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QLineEdit" name="tacheId">
        <property name="text">
         <string>Donnez id de la tache ici</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="projetId">
-       <property name="text">
-        <string>Donner id du projet</string>
        </property>
       </widget>
      </item>
@@ -106,7 +92,14 @@
      <item>
       <widget class="QPushButton" name="ajouterProjet">
        <property name="text">
-        <string>Ajouter Projet (Id et Titre Uniquement)</string>
+        <string>Ajouter Projet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="Idprojet">
+       <property name="text">
+        <string>id du projet</string>
        </property>
       </widget>
      </item>

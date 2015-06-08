@@ -25,9 +25,9 @@ int main(int argc, char *argv[])
    // ProgrammationManager &p = ProgrammationManager::getInstance();
     //p.ajouterProgrammation(m.getTache("id"), d, t, t2);
     w.update();
-    ProjetManager &pm = ProjetManager::getInstance();
-    pm.ajouterProjet("id", "titre");
-    pm.ajouterTache("id", "id");
+   // ProjetManager &pm = ProjetManager::getInstance();
+   // pm.ajouterProjet("id", "titre");
+   // pm.ajouterTache("id", "id");
     //w.MainWindow::afficher(t);
     w.show();
 

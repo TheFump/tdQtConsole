@@ -88,6 +88,7 @@ void MainWindow::on_ajouterTache_pressed()
 {
     TacheManager &m = TacheManager::getInstance();
     Duree d = ui->duree->value();
+    ProjetManager &p = ProjetManager::getInstance();
 
     if(ui->preempt->isChecked() == false && d.getDureeEnHeures() >= 12)
     {
@@ -97,15 +98,20 @@ void MainWindow::on_ajouterTache_pressed()
     else{
     if(ui->preempt->isChecked() && ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), true);
+        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
     }
-    else   if(ui->preempt->isChecked() && !ui->composite->isChecked()){
+
+    else if(ui->preempt->isChecked() && !ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), true);
+        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
     }
-    else   if(!ui->preempt->isChecked() && ui->composite->isChecked()){
+    else if(!ui->preempt->isChecked() && ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), false);
+        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
     }
-    else   if(!ui->preempt->isChecked() && !ui->composite->isChecked()){
+    else if(!ui->preempt->isChecked() && !ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), false);
+        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
     }
      ui->Display->clear();
      ui->Display->appendPlainText(m.getTache(ui->id->text()).Tache::afficherTache());
@@ -116,15 +122,15 @@ void MainWindow::on_ajouterTache_pressed()
 void MainWindow::on_ajouterProjet_pressed()
 {
     ProjetManager &p = ProjetManager::getInstance();
-    p.ajouterProjet(ui->id->text(), ui->titre->text());
+    p.ajouterProjet(ui->Idprojet->text(), ui->titre->text());
 }
 
-void MainWindow::on_addtachetoproject_clicked()
+/*void MainWindow::on_addtachetoproject_clicked()
 {
     ProjetManager &p = ProjetManager::getInstance();
 
-    p.ajouterTache(ui->tacheId->text(), ui->projetId->text());
-}
+    p.ajouterTache(ui->tacheId->text(), ui->Idprojet->text());
+}*/
 
 
 void MainWindow::on_MainWindow_quit()
