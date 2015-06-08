@@ -1,6 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+//#include "mainwindow.h"
+#include "tachemanager.h"
+#include "programmation.h"
+#include "programmationmanager.h"
+#include "ui_mainwindow.h"
+#include "projetmanager.h"
 
 #include <QMainWindow>
 #include <QTextStream>
@@ -25,6 +31,8 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsTextItem>
 #include <QTableWidgetItem>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
 
 class Programmation;
 
@@ -48,6 +56,10 @@ private:
     Ui::MainWindow *ui;
     void displayProgrammation(const Programmation& p);
 
+    void addTreeRoot(QString name, Projet& p);
+    void addTreeChild(QTreeWidgetItem *parent, QString name);
+    void treeGestion();
+    void projetGestion();
 
 public slots:
     void on_printTache_clicked();
@@ -58,6 +70,7 @@ public slots:
     void on_CalendarPrevious_clicked();
     void on_ajouterProjet_pressed();
     //void on_addtachetoproject_clicked();
+
 
 };
 

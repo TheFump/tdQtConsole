@@ -64,9 +64,9 @@ void ProjetManager::ajouterTache(const QString &tid, const QString &pid)
     ProjetManager &p = ProjetManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
 
-    Projet h = p.getProjet(pid);
-    Tache t = m.getTache(tid);
-    h.addTache(&t);
+    Projet * h = &(p.getProjet(pid));
+    Tache * t = &(m.getTache(tid));
+    h->addTache(t);
 }
 
 

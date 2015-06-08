@@ -13,6 +13,5 @@ void Projet::addTache(Tache *t)
         taches=newtab;
         delete[] old;
     }
-    taches[nb]=t;
-    nb++;
+    taches[nb++]=t;
 }

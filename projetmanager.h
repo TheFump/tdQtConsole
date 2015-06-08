@@ -29,6 +29,31 @@ public :
 
     void ajouterTache(const QString& tid, const QString& pid);
 
+    class Iterator {
+        friend class ProjetManager;
+        Projet** currentProj;
+        unsigned int nbRemain;
+        Iterator(Projet** u, unsigned nb):currentProj(u),nbRemain(nb){}
+    public:
+        Iterator():nbRemain(0),currentProj(0){}
+        bool isDone() const { return nbRemain==0; }
+        void next() {
+            if (isDone())
+                throw CalendarException("error, next on an iterator which is done");
+            nbRemain--;
+            currentProj++;
+        }
+        Projet& current() const {
+            if (isDone())
+                throw CalendarException("error, indirection on an iterator which is done");
+            return **currentProj;
+        }
+    };
+
+    Iterator getIterator() {
+        return Iterator(projets,nb);
+    }
+
 };
 
 #endif // PROJETMANAGER

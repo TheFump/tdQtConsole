@@ -1,9 +1,4 @@
 #include "mainwindow.h"
-#include "tachemanager.h"
-#include "programmation.h"
-#include "programmationmanager.h"
-#include "ui_mainwindow.h"
-#include "projetmanager.h"
 
 
 
@@ -33,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent) :
         }
     }
     ui->CalendarDate->setDate(QDate::currentDate());
+    ui->ProjetDisplay->setColumnCount(3);
+        QStringList headers;
+        headers << tr("Projet") << tr("Tache") << tr("Tache Précédente");
+        ui->ProjetDisplay->setHeaderLabels(headers);
 
 }
 
@@ -45,7 +44,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::update()
 {
-  MainWindow::afficherCalendar();
+  this->afficherCalendar();
+  this->treeGestion();
+
 }
 
 void MainWindow::afficherCalendar()
@@ -71,6 +72,53 @@ void MainWindow::displayProgrammation(const Programmation &p)
     {
         ui->Calendar->item(i, date)->setBackgroundColor(Qt::gray);
     }
+}
+
+void MainWindow::addTreeRoot(QString name, Projet& p)
+{
+        // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
+        QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->ProjetDisplay);
+        // QTreeWidgetItem::setText(int column, const QString & text)
+        treeItem->setText(0, name);
+        /*QTreeWidgetItem *treeItem2 = new QTreeWidgetItem(treeItem);
+        treeItem2->setText(0, "name");
+        treeItem2->addChild(treeItem2);*/
+        Projet::Iterator Ip = p.getIterator();
+        while(!Ip.isDone())
+        {
+            this->addTreeChild(treeItem, Ip.current().getTitre());
+            TacheManager &m = TacheManager::getInstance();
+           ui->Display->appendPlainText( m.getTache(Ip.current().getId()).afficherTache());
+            Ip.next();
+        }
+}
+
+void MainWindow::addTreeChild(QTreeWidgetItem *parent, QString name)
+{
+    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
+        QTreeWidgetItem *treeItem = new QTreeWidgetItem(parent);
+        // QTreeWidgetItem::setText(int column, const QString & text)
+        treeItem->setText(0, name);
+        // QTreeWidgetItem::addChild(QTreeWidgetItem * child)
+        treeItem->addChild(treeItem);
+
+}
+
+void MainWindow::treeGestion()
+{
+
+    ProjetManager &p = ProjetManager::getInstance();
+
+    ProjetManager::Iterator Ip = p.getIterator();
+    ui->ProjetDisplay->clear();
+
+    while(!Ip.isDone())
+    {
+        this->addTreeRoot(Ip.current().getTitre(), Ip.current());
+        Ip.next();
+    }
+
+
 }
 
 
