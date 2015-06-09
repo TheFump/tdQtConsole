@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-
+///voldjinn
 
 
 
@@ -54,6 +54,11 @@ void MainWindow::afficherCalendar()
     ProgrammationManager &p = ProgrammationManager::getInstance();
     ProgrammationManager::Iterator i = p.getIterator();
     QDate comp = ui->CalendarDate->date();
+    for(int i =0; i < 24; i++){
+        for(int j =0; j < 7; j++){
+           ui->Calendar->item(i, j)->setBackgroundColor(Qt::white);
+        }
+    }
     while(!i.isDone()){
         if(i.current().getDate().weekNumber() == comp.weekNumber() ){
             if(i.current().getDate().year() == comp. year()){
@@ -66,7 +71,7 @@ void MainWindow::afficherCalendar()
 
 void MainWindow::displayProgrammation(const Programmation &p)
 {
-    int date = p.getDate().dayOfWeek();
+    int date = p.getDate().dayOfWeek() -1;
     int i=0;
     for( i = p.getHoraire().toString("h").toInt(); i <p.getfin().toString("h").toInt(); i++)
     {
@@ -141,17 +146,14 @@ void MainWindow::on_ajouterTache_pressed()
     if(ui->preempt->isChecked() == false && d.getDureeEnHeures() >= 12)
     {
         QMessageBox::warning(this, "error", "Duree > 12");
-
     }
     else{
     if(ui->preempt->isChecked() && ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), true);
-        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
     }
-
     else if(ui->preempt->isChecked() && !ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), true);
-        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
+
     }
     else if(!ui->preempt->isChecked() && ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), false);
@@ -159,10 +161,11 @@ void MainWindow::on_ajouterTache_pressed()
     }
     else if(!ui->preempt->isChecked() && !ui->composite->isChecked()){
         m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), false);
-        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
     }
+     p.ajouterTache(ui->id->text(), ui->Idprojet->text());
      ui->Display->clear();
      ui->Display->appendPlainText(m.getTache(ui->id->text()).Tache::afficherTache());
+
      update();
     }
 }
