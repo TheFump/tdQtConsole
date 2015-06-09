@@ -44,8 +44,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::update()
 {
+  ui->Display->clear();
   this->afficherCalendar();
   this->treeGestion();
+  //this->afficherEvents();
 
 }
 
@@ -125,7 +127,12 @@ void MainWindow::treeGestion()
 
 
 }
-
+/*
+void MainWindow::afficherEvents()
+{
+    EventManager &e = EventManager::getInstance();
+}
+*/
 
 
 
@@ -175,7 +182,25 @@ void MainWindow::on_ajouterProjet_pressed()
     ProjetManager &p = ProjetManager::getInstance();
     p.ajouterProjet(ui->Idprojet->text(), ui->titre->text());
 }
-
+/*
+void MainWindow::on_ajoutEvent_clicked()
+{
+    EventManager &e = EventManager::getInstance();
+    if(ui->event1j->isChecked() && !ui->eventpj->isChecked() && !ui->rdv->isChecked())
+    {
+        e.ajouterEvent(ui->idevent->text(), ui->titreevent->text(), ui->dureeevnt->value(), ui->datedebevent->date() );
+    }
+    else if(!ui->event1j->isChecked() && ui->eventpj->isChecked() && !ui->rdv->isChecked())
+    {
+        e.ajouterEvent(ui->idevent->text(), ui->titreevent->text(), ui->dureeevnt->value(), ui->datedebevent->date() , ui->datefinevent->date() );
+    }
+    else if(!ui->event1j->isChecked() && !ui->eventpj->isChecked() && ui->rdv->isChecked())
+    {
+        e.ajouterEvent(ui->idevent->text(), ui->titreevent->text(), ui->dureeevnt->value(), ui->datedebevent->date() , ui->timedebutevent->time(), ui->timefinevent->time() );
+    }
+    this->update();
+}
+*/
 /*void MainWindow::on_addtachetoproject_clicked()
 {
     ProjetManager &p = ProjetManager::getInstance();

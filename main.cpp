@@ -3,6 +3,7 @@
 //#include "taches.h"
 #include"tachemanager.h"
 #include "projetmanager.h"
+#include "eventmanager.h"
 
 
 #include <QApplication>
@@ -21,9 +22,12 @@ int main(int argc, char *argv[])
     TacheManager &m = TacheManager::getInstance();
     m.ajouterTache("id", "titre", 600, d, du, false);
     m.ajouterTache("id2", "titre2", 600, d, du, true);
-    Event e("id", "titre", 600);
+
     ProgrammationManager &p = ProgrammationManager::getInstance();
     p.ajouterProgrammation(m.getTache("id"), d, t, t2);
+
+    EventManager &e = EventManager::getInstance();
+    e.ajouterEvent("id", "titre", 200, d);
 
     ProjetManager &pm = ProjetManager::getInstance();
     pm.ajouterProjet("id", "titre");

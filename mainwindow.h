@@ -7,6 +7,7 @@
 #include "programmationmanager.h"
 #include "ui_mainwindow.h"
 #include "projetmanager.h"
+#include "eventmanager.h"
 
 #include <QMainWindow>
 #include <QTextStream>
@@ -60,6 +61,7 @@ private:
     void addTreeChild(QTreeWidgetItem *parent, QString name);
     void treeGestion();
     void projetGestion();
+    //void afficherEvents();
 
 public slots:
     void on_printTache_clicked();
@@ -70,7 +72,7 @@ public slots:
     void on_CalendarPrevious_clicked();
     void on_ajouterProjet_pressed();
     //void on_addtachetoproject_clicked();
-
+   // void on_ajoutEvent_clicked();
 
 };
 

@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     programmation.cpp \
     programmationmanager.cpp \
     projetmanager.cpp \
-    projet.cpp
+    projet.cpp \
+    eventmanager.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -28,7 +29,8 @@ HEADERS += \
     programmation.h \
     programmationmanager.h \
     projet.h \
-    projetmanager.h
+    projetmanager.h \
+    eventmanager.h
 
 FORMS += \
     mainwindow.ui

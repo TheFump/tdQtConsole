@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1224</width>
-    <height>780</height>
+    <width>1236</width>
+    <height>845</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>220</x>
       <y>560</y>
-      <width>381</width>
-      <height>161</height>
+      <width>371</width>
+      <height>241</height>
      </rect>
     </property>
    </widget>
@@ -304,7 +304,7 @@
       <x>596</x>
       <y>350</y>
       <width>351</width>
-      <height>381</height>
+      <height>451</height>
      </rect>
     </property>
     <property name="columnCount">
@@ -316,13 +316,131 @@
      </property>
     </column>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_5">
+    <property name="geometry">
+     <rect>
+      <x>950</x>
+      <y>390</y>
+      <width>261</width>
+      <height>409</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_5">
+     <item>
+      <widget class="QPushButton" name="ajoutEvent">
+       <property name="text">
+        <string>Ajout Event</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="event1j">
+       <property name="text">
+        <string>Event sur une journée</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="eventpj">
+       <property name="text">
+        <string>Event sur plusieurs jours</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="rdv">
+       <property name="text">
+        <string>Rendez vous</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="idevent">
+       <property name="text">
+        <string>id du Rdv</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>Titre</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="titreevent">
+       <property name="text">
+        <string>description ou titre du rdv</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Duree</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="dureeevnt"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>Date</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="datedebevent"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>Date fin (si plusieur jours)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateEdit" name="datefinevent"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>Début rdv</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTimeEdit" name="timedebutevent"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>Fin rdv</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTimeEdit" name="timefinevent"/>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1224</width>
+     <width>1236</width>
      <height>21</height>
     </rect>
    </property>
