@@ -1,73 +1,75 @@
 #include "projetmanager.h"
+#include "projet.h"
 
-ProjetManager::ProjetManager():projets(0),nb(0),nbMax(0){}
+ProjetManager::ProjetManager()
+    :projets(0),nb(0),nbMax(0){}
 
 ProjetManager ProjetManager::m_instance = ProjetManager();
 
-ProjetManager &ProjetManager::getInstance()
+ProjetManager& ProjetManager::getInstance()
 {
     return m_instance;
 }
 
-void ProjetManager::addItem(Projet* t){
+void ProjetManager::addItem(Projet* p){
     if (nb==nbMax){
         Projet** newtab=new Projet*[nbMax+10];
         for(unsigned int i=0; i<nb; i++) newtab[i]=projets[i];
-        // ou memcpy(newtab,taches,nb*sizeof(Tache*));
+        // ou memcpy(newtab,Projets,nb*sizeof(Projet*));
         nbMax+=10;
         Projet** old=projets;
         projets=newtab;
         delete[] old;
     }
-    projets[nb++]=t;
+    projets[nb++]=p;
 }
 
-Projet* ProjetManager::trouverProjet(const QString& id)const{
+Projet* ProjetManager::trouverProjet(const QString& t)const{
     for(unsigned int i=0; i<nb; i++)
-        if (id==projets[i]->getId()) return projets[i];
+        if (t==projets[i]->getTitre()) return projets[i];
     return 0;
 }
 
-Projet& ProjetManager::ajouterProjet(const QString& id, const QString& t){
-    if (trouverProjet(id)) throw CalendarException("erreur, ProjetManager, Projet deja existante");
-    Projet* newt=new Projet(id,t);
-    addItem(newt);
-    return *newt;
+Projet& ProjetManager::ajouterProjet(const QString& t){
+    if (trouverProjet(t))
+        throw CalendarException("erreur, ProjetManager, Projet deja existante");
+    Projet* newp=new Projet(t);
+    addItem(newp);
+    return *newp;
 }
 
-Projet& ProjetManager::getProjet(const QString& id){
-    Projet* t=trouverProjet(id);
-    if (!t) throw CalendarException("erreur, ProjetManager, Projet inexistante");
-    return *t;
+Projet& ProjetManager::getProjet(const QString& n){
+    Projet* p=trouverProjet(n);
+    if (!p) throw CalendarException("erreur, ProjetManager, Projet inexistante");
+    return *p;
 }
 
-/*const Projet& ProjetManager::getProjet(const QString& id)const{
-    return const_cast<TacheManager*>(this)->getProjet(id);
-}*/
-
-ProjetManager::~ProjetManager(){
-    //if (file!="") save(file);
-    for(unsigned int i=0; i<nb; i++) delete projets[i];
-    delete[] projets;
-    file="";
-}
-
-
-void ProjetManager::viderProjet()
+void ProjetManager::ajouterTache(QStringList chemin,Tache& t)
 {
-    for(unsigned int i=0; i<nb; i++) delete projets[i];
-    delete[] projets;
+    if (chemin.isEmpty())
+        throw CalendarException("erreur ProjetManager: pas de nom de Projet");
+    Projet* tmp=trouverProjet(chemin[0]);
+    chemin.erase(chemin.begin());
+    tmp->ajouterTache(chemin,t);
 }
 
-void ProjetManager::ajouterTache(const QString &tid, const QString &pid)
-{
-    ProjetManager &p = ProjetManager::getInstance();
-    TacheManager &m = TacheManager::getInstance();
+//const Projet& ProjetManager::getProjet(const QString& n)const{
+//    return const_cast<Projet*>(this->getProjet(n);
+//}
 
-    Projet * h = &(p.getProjet(pid));
-    Tache * t = &(m.getTache(tid));
-    h->addTache(t);
-}
+//ProjetManager::~ProjetManager(){
+//    //if (file!="") save(file);
+//    for(unsigned int i=0; i<nb; i++) delete projets[i];
+//    delete[] projets;
+//    //file="";
+//}
 
+
+
+//void ProjetManager::viderProjets()
+//{
+//    for(unsigned int i=0; i<nb; i++) delete projets[i];
+//    delete[] projets;
+//}
 
 

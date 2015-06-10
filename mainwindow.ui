@@ -24,42 +24,23 @@
      </rect>
     </property>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>211</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Gestion des Taches</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="QWidget" name="verticalLayoutWidget_2">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>20</y>
-      <width>211</width>
-      <height>106</height>
+      <y>0</y>
+      <width>191</width>
+      <height>82</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QPushButton" name="printTache">
+      <widget class="QLabel" name="label">
        <property name="text">
-        <string>Afficher Tache</string>
+        <string>Affichage d'un Tache</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
@@ -70,110 +51,143 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QPushButton" name="printTache">
+       <property name="text">
+        <string>Afficher Tache</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
    <widget class="QWidget" name="verticalLayoutWidget_3">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>150</y>
-      <width>211</width>
-      <height>335</height>
+      <y>180</y>
+      <width>191</width>
+      <height>289</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>Ajout d'une Tache</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="UnitaireTache">
+         <property name="text">
+          <string>Unitaire</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="CompositeTache">
+         <property name="text">
+          <string>Composite</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="CheminTache">
+       <property name="text">
+        <string>chemin:Projet/Tache...</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="idTache">
+       <property name="text">
+        <string>id de la Tache</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="titreTache">
+       <property name="text">
+        <string>titre de la Tache</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Disponibilite</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="disponibiliteTache"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Echeance</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDateEdit" name="echeanceTache"/>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Duree (si Unitaire)</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="dureeTache">
+         <property name="maximum">
+          <number>9999999</number>
+         </property>
+         <property name="singleStep">
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="preempteTache">
+       <property name="text">
+        <string>Preempte (si Unitaire)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="ajouterTache">
        <property name="text">
         <string>Ajouter Tache</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="ajouterProjet">
-       <property name="text">
-        <string>Ajouter Projet</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="Idprojet">
-       <property name="text">
-        <string>id du projet</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="id">
-       <property name="text">
-        <string>id : ex projettitrenumero</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="titre">
-       <property name="text">
-        <string>titre</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Duree</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="duree">
-       <property name="maximum">
-        <number>9999999</number>
-       </property>
-       <property name="singleStep">
-        <number>10</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Départ</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDateEdit" name="debut"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Echeance</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QDateEdit" name="fin"/>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="composite">
-       <property name="text">
-        <string>Composite</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="preempt">
-       <property name="text">
-        <string>Préemptive</string>
        </property>
       </widget>
      </item>
@@ -192,9 +206,9 @@
    <widget class="QTableWidget" name="Calendar">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>460</x>
       <y>0</y>
-      <width>1001</width>
+      <width>771</width>
       <height>350</height>
      </rect>
     </property>
@@ -202,10 +216,10 @@
    <widget class="QWidget" name="verticalLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>510</y>
+      <x>220</x>
+      <y>40</y>
       <width>221</width>
-      <height>224</height>
+      <height>261</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -274,7 +288,7 @@
      <rect>
       <x>949</x>
       <y>350</y>
-      <width>261</width>
+      <width>294</width>
       <height>41</height>
      </rect>
     </property>
@@ -322,7 +336,7 @@
       <x>950</x>
       <y>390</y>
       <width>261</width>
-      <height>409</height>
+      <height>475</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -434,6 +448,85 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>191</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_7">
+     <item>
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>Ajout d'un Projet</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="titreProjet">
+       <property name="text">
+        <string>titre du Projet</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="addProjet">
+       <property name="text">
+        <string>Ajouter Projet</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_6">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>520</y>
+      <width>160</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label_19">
+       <property name="text">
+        <string>Ajout d'un precedance</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="precedenteTache">
+       <property name="text">
+        <string>tache precedante</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="suivanteTache">
+       <property name="text">
+        <string>tache actuelle</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ajoutPrecedance">
+       <property name="text">
+        <string>Ajouter Precedance</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -441,7 +534,7 @@
      <x>0</x>
      <y>0</y>
      <width>1236</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

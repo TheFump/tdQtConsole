@@ -1,52 +1,45 @@
-#ifndef PROJETMANAGER
-#define PROJETMANAGER
-#include "projet.h"
-#include "tachemanager.h"
+#ifndef PROJETMANAGER_H
+#define PROJETMANAGER_H
+#include "calendarexception.h"
 
+class Projet;
+class Tache;
+
+
+/** \class ProjetManager
+ * @brief The ProjetManager class : gestion des projets
+ */
 class ProjetManager {
+
     friend class Projet;
-private :
-    Projet** projets;
-    unsigned int nb;
-    unsigned int nbMax;
 
-    void addItem(Projet* t);
-    Projet* trouverProjet(const QString& id) const;
-    QString file;
-
-    static ProjetManager m_instance;
-    ~ProjetManager();
-    ProjetManager& operator= (ProjetManager& t);
-    ProjetManager();
 public :
-    static ProjetManager& getInstance();//<! Retourne instance tachemanager
-    Projet& ajouterProjet(const QString& id, const QString& t);//<! ajoute une tahce �  l'appli
-    Projet& getProjet(const QString& id);//<! retourne une tache via son id
-    bool isProjetExistant(const QString& id) const { return trouverProjet(id)!=0; }//retourne l'existance d'une tahce
-    const Projet& getProjet(const QString& code) const;//<! récupère une tahce via code
-
-    void viderProjet();//<! vide les taches
-
-    void ajouterTache(const QString& tid, const QString& pid);
+    static ProjetManager& getInstance();//<! Retourne instance Projetmanager
+    Projet& ajouterProjet(const QString& t);//<! ajoute un projet à l'appli
+    Projet& getProjet(const QString& t);//<! retourne une Projet via son titre
+    void ajouterTache(QStringList chemin, Tache& t);
+    bool isProjetExistante(const QString& t) const { return trouverProjet(t)!=0; }//retourne l'existance d'un projet
+//    const Projet& getProjet(const QString& n) const;//<! récupère un projet via un nom
+//    void viderProjets();//<! vide les Projets
 
     class Iterator {
         friend class ProjetManager;
-        Projet** currentProj;
+        Projet** currentProjet;
         unsigned int nbRemain;
-        Iterator(Projet** u, unsigned nb):currentProj(u),nbRemain(nb){}
+        Iterator(Projet** u, unsigned nb):currentProjet(u),nbRemain(nb){}
     public:
-        Iterator():nbRemain(0),currentProj(0){}
+        Iterator():nbRemain(0),currentProjet(0){}
         bool isDone() const { return nbRemain==0; }
         void next() {
             if (isDone())
                 throw CalendarException("error, next on an iterator which is done");
             nbRemain--;
-            currentProj++;
+            currentProjet++;
         }
         Projet& current() const {
             if (isDone())
                 throw CalendarException("error, indirection on an iterator which is done");
-            return **currentProj;
+            return **currentProjet;
         }
     };
 
@@ -54,7 +47,20 @@ public :
         return Iterator(projets,nb);
     }
 
+private :
+    Projet** projets;
+    unsigned int nb;
+    unsigned int nbMax;
+    void addItem(Projet* p);
+    Projet* trouverProjet(const QString& t) const;
+
+
+    static ProjetManager m_instance;
+    //~ProjetManager();
+    ProjetManager& operator=(ProjetManager& t);
+    ProjetManager();
+
 };
 
-#endif // PROJETMANAGER
 
+#endif // PROJETMANAGER_H

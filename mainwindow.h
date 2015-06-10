@@ -2,12 +2,7 @@
 #define MAINWINDOW_H
 
 //#include "mainwindow.h"
-#include "tachemanager.h"
-#include "programmation.h"
-#include "programmationmanager.h"
-#include "ui_mainwindow.h"
-#include "projetmanager.h"
-#include "eventmanager.h"
+
 
 #include <QMainWindow>
 #include <QTextStream>
@@ -36,6 +31,7 @@
 #include <QTreeWidgetItem>
 
 class Programmation;
+class Projet;
 
 namespace Ui {
 class MainWindow;
@@ -64,16 +60,18 @@ private:
     //void afficherEvents();
 
 public slots:
-    void on_printTache_clicked();
-    void on_ajouterTache_pressed();
     void on_MainWindow_quit();
     void on_addProg_clicked();
     void on_CalendarNext_clicked();
     void on_CalendarPrevious_clicked();
-    void on_ajouterProjet_pressed();
-    //void on_addtachetoproject_clicked();
+
    // void on_ajoutEvent_clicked();
 
+private slots:
+    void on_addProjet_pressed();
+    void on_ajouterTache_pressed();
+    void on_printTache_pressed();
+    void on_ajoutPrecedance_pressed();
 };
 
 

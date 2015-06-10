@@ -1,31 +1,39 @@
 #ifndef PROJET_H
 #define PROJET_H
-#include "taches.h"
-#include "projetmanager.h"
 
-class Projet {
-    friend class ProjetManager;
-protected:
-    QString identificateur;
+#include <QString>
+#include <QStringList>
+#include <QDate>
+
+#include "calendarexception.h"
+
+class Tache;
+
+class Projet
+{
+private:
     QString titre;
+    QDate disponibilite;
+    QDate echeance;
 
-    Tache** taches;
+    Tache** tab;
     unsigned int nb;
     unsigned int nbMax;
 
-    Projet(){}
-    Projet(const QString& id, const QString& t):identificateur(id), titre(t), nb(0), nbMax(0), taches(0){}
-public :
 
-    QString getId() const { return identificateur; }//<!Retourne l'identificateur
-    void setId(const QString& str){
-        //if (TacheManager::getInstance().isTacheExistante((str))) throw CalendarException("erreur TacheManager : tache id déj�  existante");
-        identificateur=str;
-    }
-    QString getTitre() const { return titre; }//<!Retourne le titre
-    void setTitre(const QString& str) { titre=str; }//<!Définir le titre
+    void addTache(Tache& t);
+public:
+    Projet(const QString& t):titre(t),disponibilite(QDate::currentDate()),echeance(QDate::currentDate()),tab(0),nb(0),nbMax(0) {}
+    ~Projet() {delete[] tab; }
+    QString afficherProjet();
+    Tache& trouverTache(const QString& t);
+    void ajouterTache(QStringList& chemin,Tache& t);
 
-    void addTache(Tache* t);
+    QString getTitre() const { return titre; }
+    QDate getDisponibilite() const { return disponibilite; }
+    QDate getEcheance() const { return echeance; }
+    void setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e);
+
 
     class Iterator {
         friend class Projet;
@@ -48,14 +56,7 @@ public :
         }
     };
 
-    Iterator getIterator() {
-        return Iterator(taches,nb);
-    }
-
-
-
+    Iterator getIterator() { return Iterator(tab,nb); }
 };
 
-
 #endif // PROJET_H
-

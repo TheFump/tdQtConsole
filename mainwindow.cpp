@@ -1,4 +1,19 @@
 #include "mainwindow.h"
+#include "tachemanager.h"
+#include "programmation.h"
+#include "programmationmanager.h"
+#include "ui_mainwindow.h"
+#include "projetmanager.h"
+#include "eventmanager.h"
+
+#include "tachemanager.h"
+#include "taches.h"
+#include "tacheunitaire.h"
+#include "tachecomposite.h"
+
+#include "projetmanager.h"
+#include "projet.h"
+
 ///voldjinn
 
 
@@ -48,7 +63,6 @@ void MainWindow::update()
   this->afficherCalendar();
   this->treeGestion();
   //this->afficherEvents();
-
 }
 
 void MainWindow::afficherCalendar()
@@ -93,9 +107,9 @@ void MainWindow::addTreeRoot(QString name, Projet& p)
         Projet::Iterator Ip = p.getIterator();
         while(!Ip.isDone())
         {
-            this->addTreeChild(treeItem, Ip.current().getTitre());
+            this->addTreeChild(treeItem, Ip.current().Tache::getTitre());
             TacheManager &m = TacheManager::getInstance();
-           ui->Display->appendPlainText( m.getTache(Ip.current().getId()).afficherTache());
+            ui->Display->appendPlainText( m.getTache(Ip.current().getId()).afficherTache());
             Ip.next();
         }
 }
@@ -107,7 +121,26 @@ void MainWindow::addTreeChild(QTreeWidgetItem *parent, QString name)
         // QTreeWidgetItem::setText(int column, const QString & text)
         treeItem->setText(0, name);
         // QTreeWidgetItem::addChild(QTreeWidgetItem * child)
-        treeItem->addChild(treeItem);
+        parent->addChild(treeItem);
+        TacheManager &m = TacheManager::getInstance();
+        qDebug()<<"erreur 1";
+        qDebug()<<"erreur 1.5";
+        TacheComposite* tc =dynamic_cast<TacheComposite*>(m.trouverTache(name));
+        qDebug()<<"erreur 2";
+        if(tc != 0)
+        {
+            qDebug()<<"erreur 3";
+            TacheComposite::Iterator it=tc->getIteratorComposite();
+            qDebug()<<"erreur 3bis";
+            while (!it.isDone())
+            {
+                qDebug()<<"erreur 3.3";
+                this->addTreeChild(treeItem,it.current().Tache::getTitre());
+                it.next();
+                qDebug()<<"erreur 3.7";
+            }
+            qDebug()<<"erreur 4";
+        }
 
 }
 
@@ -135,53 +168,6 @@ void MainWindow::afficherEvents()
 */
 
 
-
-void MainWindow::on_printTache_clicked()
-{
-    ui->Display->clear();
-    TacheManager &m = TacheManager::getInstance();
-    ui->Display->appendPlainText(m.getTache(ui->tacheId->text()).Tache::afficherTache());
-    update();
-}
-
-void MainWindow::on_ajouterTache_pressed()
-{
-    TacheManager &m = TacheManager::getInstance();
-    Duree d = ui->duree->value();
-    ProjetManager &p = ProjetManager::getInstance();
-
-    if(ui->preempt->isChecked() == false && d.getDureeEnHeures() >= 12)
-    {
-        QMessageBox::warning(this, "error", "Duree > 12");
-    }
-    else{
-    if(ui->preempt->isChecked() && ui->composite->isChecked()){
-        m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), true);
-    }
-    else if(ui->preempt->isChecked() && !ui->composite->isChecked()){
-        m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), true);
-
-    }
-    else if(!ui->preempt->isChecked() && ui->composite->isChecked()){
-        m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), false);
-        p.ajouterTache(ui->id->text(), ui->Idprojet->text());
-    }
-    else if(!ui->preempt->isChecked() && !ui->composite->isChecked()){
-        m.TacheManager::ajouterTache(ui->id->text(), ui->titre->text(), ui->duree->value(), ui->debut->date(), ui->fin->date(), false);
-    }
-     p.ajouterTache(ui->id->text(), ui->Idprojet->text());
-     ui->Display->clear();
-     ui->Display->appendPlainText(m.getTache(ui->id->text()).Tache::afficherTache());
-
-     update();
-    }
-}
-
-void MainWindow::on_ajouterProjet_pressed()
-{
-    ProjetManager &p = ProjetManager::getInstance();
-    p.ajouterProjet(ui->Idprojet->text(), ui->titre->text());
-}
 /*
 void MainWindow::on_ajoutEvent_clicked()
 {
@@ -201,18 +187,12 @@ void MainWindow::on_ajoutEvent_clicked()
     this->update();
 }
 */
-/*void MainWindow::on_addtachetoproject_clicked()
-{
-    ProjetManager &p = ProjetManager::getInstance();
-
-    p.ajouterTache(ui->tacheId->text(), ui->Idprojet->text());
-}*/
 
 
 void MainWindow::on_MainWindow_quit()
 {
     TacheManager &m = TacheManager::getInstance();
-    m.viderTaches();
+    //m.viderTaches();
 }
 
 void MainWindow::on_addProg_clicked()
@@ -241,3 +221,53 @@ void MainWindow::on_CalendarPrevious_clicked()
 
 
 
+
+
+void MainWindow::on_addProjet_pressed()
+{
+    try
+    {
+        ProjetManager &pm=ProjetManager::getInstance();
+        pm.ajouterProjet(ui->titreProjet->text());
+    } catch(CalendarException e)
+    {
+        qDebug()<<e.getInfo();
+    }
+    update();
+}
+
+void MainWindow::on_ajouterTache_pressed()
+{
+    try
+    {
+        TacheManager &tm=TacheManager::getInstance();
+        if (ui->UnitaireTache->isChecked())
+        {
+            int dur = ui->dureeTache->value();
+            Duree d(dur/60,dur%60);
+            tm.ajouterTacheUnitaire(ui->CheminTache->text(),ui->idTache->text(),ui->titreTache->text(),ui->titreTache->text(),ui->disponibiliteTache->date(),ui->echeanceTache->date(),d,ui->preempteTache->isChecked());
+        }
+        if (ui->CompositeTache->isChecked())
+            tm.ajouterTacheComposite(ui->CheminTache->text(),ui->idTache->text(),ui->titreTache->text(),ui->disponibiliteTache->date(),ui->echeanceTache->date());
+    ui->Display->clear();
+    ui->Display->appendPlainText(tm.getTache(ui->idTache->text()).afficherTache());
+    update();
+    } catch(CalendarException e)
+    {
+        qDebug()<<e.getInfo();
+    }
+}
+
+void MainWindow::on_printTache_pressed()
+{
+    ui->Display->clear();
+    TacheManager &m = TacheManager::getInstance();
+    ui->Display->appendPlainText(m.getTache(ui->tacheId->text()).afficherTache());
+    update();
+}
+
+
+void MainWindow::on_ajoutPrecedance_pressed()
+{
+
+}
