@@ -269,5 +269,6 @@ void MainWindow::on_printTache_pressed()
 
 void MainWindow::on_ajoutPrecedance_pressed()
 {
-
+    TacheManager &p=TacheManager::getInstance();
+    p.getTache(ui->suivanteTache->text()).ajouterContraintePrecedance(p.getTache(ui->precedenteTache->text()));
 }
