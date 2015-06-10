@@ -36,6 +36,7 @@ protected:
     void ajouterSuccesseur(Tache& t);
 
 public:
+
     Tache(const QString& id,const QString& t, const QDate& dispo, const QDate& deadline);
     virtual ~Tache() { delete[] tabPredecesseur; delete[] tabSuccesseur; }
     virtual QString afficherTache();
@@ -47,6 +48,7 @@ public:
     const QDate& getDateDisponibilite() const {  return disponibilite; }//<!Retourne la disponibilité
     const QDate& getDateEcheance() const {  return echeance; }//<!Retourne l'echeance
     void setDatesDisponibiliteEcheance(const QDate& disp, const QDate& e);
+
 
     class Iterator {
             friend class Tache;

@@ -16,6 +16,7 @@ private:
 public:
     TacheUnitaire(const QString& id, const QString& i, const QString& t, const QDate& dispo, const QDate& deadline, const Duree& d, bool p);
     QString afficherTache();
+    void afficher(int retour [8]) {}
 
     const Duree& getDuree() const { return duree; }
     bool getPreempte() const { return preempte; }

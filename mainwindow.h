@@ -57,7 +57,7 @@ private:
     void addTreeChild(QTreeWidgetItem *parent, QString name);
     void treeGestion();
     void projetGestion();
-    //void afficherEvents();
+    void afficherEvents();
 
 public slots:
     void on_MainWindow_quit();
@@ -66,6 +66,7 @@ public slots:
     void on_CalendarPrevious_clicked();
 
    // void on_ajoutEvent_clicked();
+    //void on_addtachetoproject_clicked();
 
 private slots:
     void on_addProjet_pressed();

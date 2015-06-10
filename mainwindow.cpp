@@ -44,9 +44,9 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     ui->CalendarDate->setDate(QDate::currentDate());
     ui->ProjetDisplay->setColumnCount(3);
-        QStringList headers;
-        headers << tr("Projet") << tr("Tache") << tr("Tache Précédente");
-        ui->ProjetDisplay->setHeaderLabels(headers);
+    QStringList headers;
+    headers << tr("Projet") << tr("Tache") << tr("Tache Précédente");
+    ui->ProjetDisplay->setHeaderLabels(headers);
 
 }
 
@@ -59,10 +59,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::update()
 {
-  ui->Display->clear();
-  this->afficherCalendar();
-  this->treeGestion();
-  //this->afficherEvents();
+
+    ui->Display->clear();
+    this->afficherCalendar();
+    this->treeGestion();
+    this->afficherEvents();
+
 }
 
 void MainWindow::afficherCalendar()
@@ -72,17 +74,17 @@ void MainWindow::afficherCalendar()
     QDate comp = ui->CalendarDate->date();
     for(int i =0; i < 24; i++){
         for(int j =0; j < 7; j++){
-           ui->Calendar->item(i, j)->setBackgroundColor(Qt::white);
+            ui->Calendar->item(i, j)->setBackgroundColor(Qt::white);
         }
     }
     while(!i.isDone()){
         if(i.current().getDate().weekNumber() == comp.weekNumber() ){
             if(i.current().getDate().year() == comp. year()){
-        MainWindow::displayProgrammation(i.current());
+                MainWindow::displayProgrammation(i.current());
 
             }
-    }
-    i.next();}
+        }
+        i.next();}
 }
 
 void MainWindow::displayProgrammation(const Programmation &p)
@@ -97,11 +99,11 @@ void MainWindow::displayProgrammation(const Programmation &p)
 
 void MainWindow::addTreeRoot(QString name, Projet& p)
 {
-        // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
-        QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->ProjetDisplay);
-        // QTreeWidgetItem::setText(int column, const QString & text)
-        treeItem->setText(0, name);
-        /*QTreeWidgetItem *treeItem2 = new QTreeWidgetItem(treeItem);
+    // QTreeWidgetItem(QTreeWidget * parent, int type = Type)
+    QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->ProjetDisplay);
+    // QTreeWidgetItem::setText(int column, const QString & text)
+    treeItem->setText(0, name);
+    /*QTreeWidgetItem *treeItem2 = new QTreeWidgetItem(treeItem);
         treeItem2->setText(0, "name");
         treeItem2->addChild(treeItem2);*/
         Projet::Iterator Ip = p.getIterator();
@@ -160,15 +162,58 @@ void MainWindow::treeGestion()
 
 
 }
-/*
+
 void MainWindow::afficherEvents()
 {
+    //retour [8] = {0, 24, this->debut.dayOfWeek()-1, this->fin.dayOfWeek()-1, this->debut.weekNumber(),this->fin.weekNumber(), this->debut.month(), this->debut.year() };
     EventManager &e = EventManager::getInstance();
+    EventManager::Iterator it = e.getIterator();
+    int buf[8];
+    QDate comp = ui->CalendarDate->date();
+    while(!it.isDone())
+    {
+        it.current().afficher(buf);
+
+        if(buf[4] == comp.weekNumber() || buf[5] == comp.weekNumber() ){
+            if(buf[6] == comp.month() ){
+                if(buf[7] == comp. year()){
+                    for(int h = buf[0]; h <= buf[1]; h++){
+                        for(int d = buf[2]; d < buf[3]; d++){
+                            ui->Calendar->item(h, d)->setBackgroundColor(Qt::green);
+                        }
+                    }
+                }
+            }
+        }
+        it.next();
+    }
 }
-*/
+
+
+
+
+
 
 
 /*
+
+void MainWindow::on_printTache_clicked()
+{
+    ui->Display->clear();
+    TacheManager &m = TacheManager::getInstance();
+    ui->Display->appendPlainText(m.getTache(ui->tacheId->text()).Tache::afficherTache());
+    update();
+}
+
+
+
+void MainWindow::on_ajouterProjet_pressed()
+{
+    ProjetManager &p = ProjetManager::getInstance();
+    p.ajouterProjet(ui->Idprojet->text(), ui->titre->text());
+}
+
+
 void MainWindow::on_ajoutEvent_clicked()
 {
     EventManager &e = EventManager::getInstance();
@@ -186,7 +231,17 @@ void MainWindow::on_ajoutEvent_clicked()
     }
     this->update();
 }
+<<<<<<< HEAD
 */
+
+
+/*void MainWindow::on_addtachetoproject_clicked()
+{
+    ProjetManager &p = ProjetManager::getInstance();
+
+    p.ajouterTache(ui->tacheId->text(), ui->Idprojet->text());
+}*/
+
 
 
 void MainWindow::on_MainWindow_quit()
