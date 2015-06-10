@@ -28,12 +28,12 @@ Event* EventManager::trouverEvent(const QString& id)const{
     return 0;
 }
 
-Event& EventManager::ajouterEvent(const QString& id, const QString& t, const Duree& dur){
+/*Event& EventManager::ajouterEvent(const QString& id, const QString& t, const Duree& dur){
     if (trouverEvent(id)) throw CalendarException("erreur, EventManager, Event deja existante");
     Event* newt=new Event(id,t,dur);
     addItem(newt);
     return *newt;
-}
+}*/
 
 Evt1j &EventManager::ajouterEvent(const QString &id, const QString &t, const Duree &dur, const QDate &date)
 {
@@ -66,12 +66,12 @@ Event& EventManager::getEvent(const QString& id){
 }
 
 
-int * EventManager::afficherEvent(const QString &id)
+void EventManager::afficherEvent(const QString &id, int retour [8])
 {
     Event*  t= EventManager::trouverEvent(id);
     if (!t) throw CalendarException("erreur, EventManager, Event inexistante");
-    int * retour = t->afficher();
-    return retour;
+    t->afficher(retour);
+
 }
 /*
 const Event& EventManager::getEvent(const QString& id)const{

@@ -24,7 +24,7 @@ private :
 
 public :
     static  EventManager& getInstance();//<! Retourne instance Eventmanager
-    Event & ajouterEvent(const QString& id, const QString& t, const Duree& dur);//<! ajoute une tahce Ã  l'appli
+    //Event & ajouterEvent(const QString& id, const QString& t, const Duree& dur);//<! ajoute une tahce Ã  l'appli
     Evt1j & ajouterEvent(const QString& id, const QString& t, const Duree& dur, const QDate& date);//<! ajoute une tahce Ã  l'appli
     EvtPj & ajouterEvent(const QString& id, const QString& t, const Duree& dur, const QDate& deb, const QDate& fin);//<! ajoute une tahce Ã  l'appli
     Rdv & ajouterEvent(const QString& id, const QString& t, const Duree& dur, const QDate& date, const QTime& deb, const QTime& fin);//<! ajoute une tahce Ã  l'appli
@@ -34,7 +34,7 @@ public :
     void load(const QString& f); //<! enregistre l'Ã©tat des Events
     void save(const QString& f); //charge les Events
     void viderEvent();//<! vide les Events
-    int* afficherEvent(const QString& id);
+    void afficherEvent(const QString& id, int retour [8]);
 
     class Iterator {
         friend class EventManager;

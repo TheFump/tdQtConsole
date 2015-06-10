@@ -15,8 +15,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
-    QDate d (2015,6,9); QDate du (2016, 7, 1);
-    QTime t (2, 0); QTime t2(4, 0);
+    QDate d (2015,6,10); QDate du (2016, 7, 1);
+    QDate d3 (2015,6,11);
+    QDate d4 (2015,6,12);
+    QDate d5 (2015,6,13);
+    QTime t (2, 0); QTime t2(8, 0);
     //Tache t("id", "titre", 600, d, du, false);
     //TacheManager &m1 = TacheManager::getInstance();
     TacheManager &m = TacheManager::getInstance();
@@ -27,7 +30,10 @@ int main(int argc, char *argv[])
     p.ajouterProgrammation(m.getTache("id"), d, t, t2);
 
     EventManager &e = EventManager::getInstance();
-    e.ajouterEvent("id", "titre", 200, d);
+    //e.ajouterEvent("id", "titre", 200, d);
+    e.ajouterEvent("id2", "titre", 200, d, t, t2);
+    e.ajouterEvent("id3", "titre", 200, d3);
+    e.ajouterEvent("id4", "titre", 200, d4, d5);
 
     ProjetManager &pm = ProjetManager::getInstance();
     pm.ajouterProjet("id", "titre");

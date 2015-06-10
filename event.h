@@ -32,7 +32,7 @@ public :
     void setTitre(const QString& str) { titre=str; }//<!Définir le titre
     Duree getDuree() const { return duree; }//<!Retourne la durée
     void setDuree(const Duree& d) { duree=d; }//<!Défini la durée
-    int* afficher(){return 0;}
+    virtual void afficher(int retour [8]) = 0;
 };
 
 class Evt1j  : public Event{
@@ -44,7 +44,7 @@ protected:
 public:
     QDate getDate() const { return date; }//<!Retourne le titre
     void setDate(const QDate& str) { date=str; }//<!Définir le titre
-    int* afficher();
+    void afficher(int retour [8]);
 };
 
 class EvtPj  : public Event{
@@ -59,7 +59,7 @@ public:
     void setdebut (const QDate& str){ debut=str; } //<!Définir le titre
     QDate getFin() const { return fin; }//<!Retourne le titre
     void setFin (const QDate& str){ debut=str; } //<!Définir le titre
-    int* afficher();
+    void afficher(int  retour [8]);
 };
 
 class Rdv : public Evt1j{
@@ -74,7 +74,7 @@ public:
     void setdebut (const QTime& str){ debut=str; } //<!Définir le titre
     QTime getFin() const { return fin; }//<!Retourne le titre
     void setFin (const QTime& str){ debut=str; } //<!Définir le titre
-    int* afficher();
+    void afficher(int  retour [8]);
 };
 
 

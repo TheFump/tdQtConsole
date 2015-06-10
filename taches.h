@@ -47,6 +47,7 @@ public:
     void setPreemptive() { preemptive=true; }//<!Défini la préemptivité
     void setNonPreemptive() { preemptive=false; }//<!Défini la préemptivité
     QString afficherTache();
+    void afficher(int retour[8]){};
 
 
 };
